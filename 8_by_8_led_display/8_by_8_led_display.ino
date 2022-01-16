@@ -5,11 +5,7 @@ int DIN = 12;
 int CS =  11;
 int CLK = 10;
 
-byte a[8] =     {0x00, 0xE9, 0x89, 0xE9, 0x29, 0xEF, 0x00, 0x00,};
-byte b[8] =     {0x00, 0xE7, 0x94, 0xE7, 0x91, 0xE7, 0x00, 0x00,};
-byte c[8] =     {0x00, 0xEC, 0x8A, 0x8C, 0x8A, 0xEA, 0x00, 0x00,};
-byte d[8] =     {0x00, 0xEE, 0x49, 0x4E, 0x49, 0xEE, 0x00, 0x00,};
-byte e[8];
+byte e[8]; // SHOWING SINGLE FRAME
 // TO PRINT "KEVIN"
 byte f[30] =     {0xf8,0x20,0x50,0x88,0x00,0xf8,0xa8,0xa8,0x00,0x38,0x40,0x80,0x40,0x38,0x00,0x88,0xf8,0x88,0x00,0xf8,0x20,0x40,0xf8,0x00,0x20,0x20,0x20,0x00,0x00,0x70};
 // TO PRINT "GOVIND"
@@ -20,7 +16,7 @@ LedControl lc = LedControl(DIN, CLK, CS, 0);
 
 void setup() {
   lc.shutdown(0, false);      //The MAX72XX is in power-saving mode on startup
-  lc.setIntensity(0, 3);     // Set the brightness to maximum value
+  lc.setIntensity(0, 3);     // Set the brightness  maximum value is 15
   lc.clearDisplay(0);         // and clear the display
 
 }
@@ -49,18 +45,18 @@ delay(100);
 
 
 void printlnByte(byte character [])
-{
+{/*for showing single frame */
   int i = 0;
   for (i = 0; i < 8; i++)
   {
     lc.setRow(0, i, character[i]);
   }
   delay(100);
-
 }
 int rightRotate(int n, unsigned int d)
 {
-   /* In n>>d, first d bits are 0. To put last 3 bits of at 
+   /*for  horizontal rotation
+   In n>>d, first d bits are 0. To put last 3 bits of at 
      first, do bitwise or of n>>d with n <<(INT_BITS - d) */
    return (n >> d)|(n << (INT_BITS - d));
 }
